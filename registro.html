@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Account Manager Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Sistema de diseño modular */
+        :root {
+    --primary: #6366f1;
+    --secondary: #8b5cf6;
+    --success: #10b981;
+    --danger: #ef4444;
+    --text: #1f2937;
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --radius: 12px;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+[data-theme="dark"] {
+    --text: #f8fafc;
+    --bg: #1e293b;
+    --surface: #334155;
+    --border: #475569;
+}
+
+/* Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 2rem;
+    min-height: 100vh;
+}
+
+
+.btn-primary {
+  margin-top: 10px; /* Ajusta este valor según lo que necesites */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header */
+.app-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.actions {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Formulario */
+.form-card {
+    background: rgba(200, 200, 200, 0.2);
+
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--text);
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--text);
+    transition: var(--transition);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--text);
+    opacity: 0.7;
+    transition: var(--transition);
+}
+
+.toggle-password:hover {
+    opacity: 1;
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Tarjetas de cuentas */
+.accounts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.account-card {
+    background: var(--surface);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    position: relative;
+    transition: var(--transition);
+}
+
+.account-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.account-card h3 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.account-card p {
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.account-card a {
+    color: var(--secondary);
+    text-decoration: none;
+}
+
+.account-card a:hover {
+    text-decoration: underline;
+}
+
+.card-actions {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Botones */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: white;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    color: var(--text);
+    transition: var(--transition);
+}
+
+.icon-btn:hover {
+    color: var(--primary);
+    transform: scale(1.1);
+}
+
+/* Controles de historial */
+.history-controls {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    display: flex;
+    gap: 1rem;
+    background: var(--surface);
+    padding: 1rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+/* Búsqueda */
+.search-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 1rem 0;
+}
+
+#search {
+    width: 100%;
+    padding: 0.75rem 2.5rem;
+    border-radius: var(--radius);
+    border: 2px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+}
+
+.search-container i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.7;
+}
+
+/* Utilidades */
+.hidden {
+    display: none !important;
+}
+
+.password-field {
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.password-field:hover {
+    color: var(--primary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+    
+    .form-card {
+        padding: 1rem;
+    }
+    
+    .brand {
+        font-size: 1.25rem;
+    }
+    
+    .history-controls {
+        bottom: 1rem;
+        right: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .accounts-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="app-header">
+            <div class="brand">
+                <img src="pak.png" alt="Logo" style="width: 3em; height: 3em;">
+                <span>SEGUREDES</span>
+            </div>
+            
+            <div class="actions">
+                <button class="icon-btn" id="toggleTheme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <input type="file" id="import" hidden>
+                <label for="import" class="icon-btn">
+                    <i class="fas fa-file-import"></i>
+                </label>
+                <button class="icon-btn" id="export">
+                    <i class="fas fa-file-export"></i>
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <form id="accountForm" class="form-card">
+                <!-- Añade estos nuevos campos al formulario (ANTES del botón de submit) -->
+<div class="form-group">
+    <label for="email">Correo asociado</label>
+    <input type="email" id="email" class="form-control">
+</div>
+
+<div class="form-group">
+    <label for="creationDate">Fecha de creación</label>
+    <input type="date" id="creationDate" class="form-control">
+</div>
+
+<div class="form-group">
+    <label for="expirationDate">Fecha de caducidad</label>
+    <input type="date" id="expirationDate" class="form-control">
+</div>
+
+<div class="form-group">
+    <label for="url">URL del perfil</label>
+    <input type="url" id="url" class="form-control">
+</div>
+
+<div class="form-group full-width">
+    <label for="notes">Notas</label>
+    <textarea id="notes" class="form-control" rows="3"></textarea>
+</div>
+                
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i>
+                    Guardar Cuenta
+                </button>
+            </form>
+
+            <div class="accounts-grid" id="accounts"></div>
+        </main>
+    </div>
+
+    <script>
+        class AccountManager {
+            constructor() {
+                this.accounts = this.loadAccounts();
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.render();
+            }
+
+            setupEventListeners() {
+                // Formulario
+                document.getElementById('accountForm').addEventListener('submit', (e) => this.handleSubmit(e));
+                
+                // Tema
+                document.getElementById('toggleTheme').addEventListener('click', () => this.toggleTheme());
+                
+                // Controles
+                document.addEventListener('click', (e) => {
+                    if (e.target.closest('.toggle-password')) this.togglePassword(e);
+                    if (e.target.closest('.delete-btn')) this.deleteAccount(e);
+                });
+            }
+
+            handleSubmit(e) {
+                e.preventDefault();
+                const account = {
+                    id: Date.now(),
+                    platform: document.getElementById('platform').value,
+                    username: document.getElementById('username').value,
+                    password: document.getElementById('password').value
+                };
+                
+                this.accounts.push(account);
+                this.saveAccounts();
+                this.render();
+                e.target.reset();
+            }
+
+            render() {
+                const container = document.getElementById('accounts');
+                container.innerHTML = this.accounts.map(account => `
+                    <div class="account-card">
+                        <div class="card-actions">
+                            <button class="icon-btn delete-btn">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                        <h3>${account.platform}</h3>
+                        <p><strong>Usuario:</strong> ${account.username}</p>
+                        <p><strong>Contraseña:</strong> <span class="password">••••••••</span></p>
+                    </div>
+                `).join('');
+            }
+
+            togglePassword(e) {
+                const input = e.target.previousElementSibling;
+                input.type = input.type === 'password' ? 'text' : 'password';
+                e.target.classList.toggle('fa-eye-slash');
+            }
+
+            deleteAccount(e) {
+                const card = e.target.closest('.account-card');
+                const id = Number(card.dataset.id);
+                this.accounts = this.accounts.filter(acc => acc.id !== id);
+                this.saveAccounts();
+                this.render();
+            }
+
+            toggleTheme() {
+                const theme = document.documentElement.getAttribute('data-theme');
+                const newTheme = theme === 'light' ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+            }
+
+            loadAccounts() {
+                return JSON.parse(localStorage.getItem('accounts')) || [];
+            }
+
+            saveAccounts() {
+                localStorage.setItem('accounts', JSON.stringify(this.accounts));
+            }
+        }
+
+        // Inicializar aplicación
+        new AccountManager();
+    </script>
+</body>
+</html>

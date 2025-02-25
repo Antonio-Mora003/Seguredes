@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Administrador</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-box">
+            <h2>Registro</h2>
+            <form id="registerForm">
+                <div class="input-group">
+                    <label for="username">Nombre de Usuario</label>
+                    <input type="text" id="username" placeholder="Ingresa tu nombre de usuario" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" placeholder="Ingresa tu contraseña" required>
+                </div>
+                <!-- Nuevo selector para elegir el rol -->
+                <div class="input-group">
+                    <label for="role">Rol</label>
+                    <select id="role">
+                        <option value="admin">Administrador</option>
+                        <option value="operator">Usuario</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Registrarse</button>
+                <p class="message" id="registerMessage"></p>
+            </form>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

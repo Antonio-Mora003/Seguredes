@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="sts.css">
+</head>
+
+
+<style>/* Reset general y estilos base */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+    
+    body {
+        background-color: #f4f4f4;
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+    }
+    
+    .panel-container {
+        display: flex;
+        width: 100%;
+        max-width: 1200px;
+        min-height: 80vh;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Menú lateral */
+    .panel-menu {
+        width: 250px;
+        background: #2C3E50;
+        color: white;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .panel-menu h2 {
+        margin-bottom: 20px;
+        font-weight: 600;
+        text-align: center;
+    }
+    
+    .panel-menu ul {
+        list-style: none;
+    }
+    
+    .panel-menu ul li {
+        margin: 15px 0;
+    }
+    
+    .panel-menu ul li a {
+        text-decoration: none;
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        border-radius: 6px;
+        transition: background 0.3s ease;
+    }
+    
+    .panel-menu ul li a:hover {
+        background: #1ABC9C;
+    }
+    
+    /* Contenido principal */
+    .panel-content {
+        flex-grow: 1;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .panel-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #3498DB;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 8px;
+    }
+    
+    .btn-logout {
+        background: #E74C3C;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+    
+    .btn-logout:hover {
+        background: #C0392B;
+    }
+    
+    .main-content {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .card {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    h3 {
+        margin-bottom: 10px;
+    }
+    
+    /* Tabla de usuarios */
+    #userTable {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+    
+    #userTable th, #userTable td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    #userTable th {
+        background: #2980B9;
+        color: white;
+    }
+    
+    #userTable tr:nth-child(even) {
+        background: #f9f9f9;
+    }
+    
+    #userTable button {
+        padding: 8px 12px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    
+    #userTable button:first-child {
+        background: #F39C12;
+        color: white;
+    }
+    
+    #userTable button:last-child {
+        background: #E74C3C;
+        color: white;
+        margin-left: 5px;
+    }
+    
+    #userTable button:hover {
+        opacity: 0.8;
+    }
+    
+    /* Campo de búsqueda */
+    .search-container {
+        margin-bottom: 15px;
+    }
+    
+    #searchBar {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        outline: none;
+    }
+    
+    #searchBar:focus {
+        border-color: #3498DB;
+    }
+    
+    /* Responsividad */
+    @media (max-width: 768px) {
+        .panel-container {
+            flex-direction: column;
+        }
+        .panel-menu {
+            width: 100%;
+            text-align: center;
+        }
+        .panel-menu ul li a {
+            justify-content: center;
+        }
+        .panel-header {
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </style>
+<body>
+    <div class="panel-container">
+        <!-- Menú lateral -->
+        <nav class="panel-menu">
+            <h2>Admin Panel</h2>
+            <ul>
+                <li><a href="#"><i class="fas fa-users"></i> Usuarios</a></li>
+                <li><a href="#"><i class="fas fa-cogs"></i> Configuración</a></li>
+                <li><a href="#"><i class="fas fa-chart-line"></i> Reportes</a></li>
+            </ul>
+        </nav>
+
+        <!-- Contenido principal -->
+        <div class="panel-content">
+            <header class="panel-header">
+                <h1 id="welcomeMessage">Bienvenido</h1>
+                <button id="logoutButton" class="btn-logout">Cerrar Sesión</button>
+            </header>
+            <main class="main-content">
+                <!-- Gestión de Usuarios -->
+
+
+
+                
+
+
+
+
+
+                <div class="card">
+                    <h3>Gestión de Usuarios</h3>
+                    <div class="search-container">
+                        <input type="text" id="searchBar" placeholder="Buscar usuario por nombre..." />
+                    </div>
+                    <table id="dataGrid" class="recordsPanel">
+                        <thead>
+                            <tr class="headerRow">
+                                <th class="colUserAlias">User Handle</th>
+                                <th class="colAccessLevel">Privilege</th>
+                                <th class="colControls">Options</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="dataRow">
+                                <td class="userTag" data-identifier="User Handle">Juan Pérez</td>
+                                <td class="permLevel" data-identifier="Privilege">Administrador</td>
+                                <td class="actionPanel" data-identifier="Options">
+                                    <button class="modifyEntry">Editar</button>
+                                    <button class="removeEntry">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                </div>
+
+                <!-- Reportes -->
+                <div class="card">
+                    <h3>Reportes</h3>
+                    <p>Visualiza los reportes disponibles en el sistema.</p>
+                    <p><strong>Total de usuarios:</strong> <span id="totalUsers">0</span></p>
+                    <p><strong>Último usuario registrado:</strong> <span id="lastUser">N/A</span></p>
+                </div>
+                
+                <div class="card">
+                    <h3>Configuración Avanzada</h3>
+                    <p>Espacio reservado para futuras configuraciones avanzadas del sistema.</p>
+                </div>
+                
+            </main>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

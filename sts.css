@@ -1,0 +1,197 @@
+:root {
+    --primary: hsl(213, 34%, 22%);
+    --secondary: hsl(198, 28%, 93%);
+    --accent: hsl(207, 90%, 54%);
+    --text: hsl(210, 24%, 16%);
+    --success: hsl(164, 71%, 45%);
+    --danger: hsl(354, 71%, 57%);
+    --radius: 12px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.recordsPanel {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 2rem 0;
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: 0 8px 24px -6px rgba(0, 32, 76, 0.1);
+    overflow: hidden;
+    font-family: 'Inter', system-ui, sans-serif;
+    position: relative;
+}
+
+/* Encabezado con efecto vidrio */
+.headerRow {
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.colUserAlias, .colAccessLevel, .colControls {
+    padding: 1.25rem 1.5rem;
+    font-weight: 600;
+    color: var(--primary);
+    letter-spacing: 0.03em;
+    border-bottom: 2px solid rgba(0,0,0,0.05);
+}
+
+.dataRow {
+    transition: var(--transition);
+    position: relative;
+}
+
+.dataRow:hover {
+    background: rgba(245, 248, 250, 0.6);
+}
+
+.dataRow:not(:last-child) td {
+    border-bottom: 1px solid rgba(0,0,0,0.03);
+}
+
+.userTag, .permLevel, .actionPanel {
+    padding: 1.25rem 1.5rem;
+    color: var(--text);
+    font-weight: 500;
+}
+
+/* Botones premium */
+.modifyEntry, .removeEntry {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.modifyEntry {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 4px 12px -2px rgba(24, 144, 255, 0.3);
+}
+
+.removeEntry {
+    background: var(--danger);
+    color: white;
+    box-shadow: 0 4px 12px -2px rgba(255, 71, 87, 0.3);
+}
+
+.modifyEntry:hover, .removeEntry:hover {
+    transform: translateY(-2px);
+    opacity: 0.95;
+}
+
+.modifyEntry:active, .removeEntry:active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Responsive móvil elegante */
+@media screen and (max-width: 768px) {
+    .recordsPanel {
+        border-radius: calc(var(--radius) * 1.5);
+        background: transparent;
+        box-shadow: none;
+    }
+    
+    .headerRow {
+        display: none;
+    }
+    
+    .dataRow {
+        display: block;
+        margin-bottom: 1.5rem;
+        background: white;
+        border-radius: var(--radius);
+        box-shadow: 0 4px 12px -4px rgba(0, 32, 76, 0.1);
+        overflow: hidden;
+    }
+    
+    .userTag, .permLevel, .actionPanel {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid rgba(0,0,0,0.03);
+    }
+    
+    .userTag::before,
+    .permLevel::before,
+    .actionPanel::before {
+        content: attr(data-identifier);
+        color: var(--primary);
+        font-weight: 600;
+        opacity: 0.7;
+        margin-right: 1rem;
+    }
+    
+    .actionPanel {
+        border-bottom: 0;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .modifyEntry, .removeEntry {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Modo oscuro automático */
+@media (prefers-color-scheme: dark) {
+    .recordsPanel {
+        background: hsl(210, 12%, 16%);
+    }
+    
+    .headerRow {
+        background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+    }
+    
+    .colUserAlias, .colAccessLevel, .colControls {
+        color: hsl(0, 0%, 90%);
+        border-bottom-color: rgba(255,255,255,0.05);
+    }
+    
+    .dataRow:hover {
+        background: rgba(255,255,255,0.03);
+    }
+    
+    .userTag, .permLevel {
+        color: hsl(0, 0%, 85%);
+    }
+    
+    .userTag::before,
+    .permLevel::before,
+    .actionPanel::before {
+        color: hsl(0, 0%, 70%);
+    }
+    
+    .dataRow:not(:last-child) td {
+        border-bottom-color: rgba(255,255,255,0.05);
+    }
+}
+
+/* Animaciones de carga */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.dataRow {
+    animation: fadeIn 0.6s ease forwards;
+}
+
+/* Mejoras de accesibilidad */
+button:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
