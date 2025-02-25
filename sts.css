@@ -195,3 +195,158 @@ button:focus {
     outline-offset: 2px;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+:root {
+    --white: #ffffff;
+    --black: #2d3436;
+    --primary: #0984e3;
+    --secondary: #dfe6e9;
+    --radius: 8px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    background: var(--white);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.4;
+    color: var(--black);
+}
+
+.pw-main-9x4q {
+    background: var(--white);
+    width: 100%;
+    max-width: 480px;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.pw-top-3fm8 {
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.pw-title-jk5r {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--black);
+}
+
+.pw-secstat-7tq2 {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #636e72;
+}
+
+.pw-content-2v6s {
+    padding: 1.5rem;
+}
+
+.pw-databox-4n7y {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.pw-infobox-r9l2 {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.pw-datalabel-1s5f {
+    color: #636e72;
+    font-size: 0.9rem;
+}
+
+.pw-datanum-x8k4 {
+    font-weight: 500;
+    color: var(--black);
+}
+
+.pw-btngroup-5tq9 {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.pw-mainbtn-3c7q {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--black);
+}
+
+.pw-color1-kj9n {
+    background: var(--primary);
+    color: var(--white) !important;
+    border-radius: var(--radius);
+}
+
+.pw-color2-m1x8 {
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: var(--radius);
+}
+
+.pw-alert-7b3t {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: var(--radius);
+    font-size: 0.85rem;
+    color: #636e72;
+}
+
+@media (min-width: 640px) {
+    .pw-main-9x4q {
+        max-width: 600px;
+        margin: 2rem;
+        border-radius: var(--radius);
+    }
+    
+    .pw-databox-4n7y {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    
+    .pw-infobox-r9l2 {
+        border: none;
+        padding: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+    
+    .pw-btngroup-5tq9 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+}
