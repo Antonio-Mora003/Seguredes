@@ -36,9 +36,36 @@
     box-sizing: border-box;
 }
 
+
+
+/* Fondo animado con efecto de pintura */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: linear-gradient(-45deg, #003366, #005599, #0088cc, #00cc99, #006600);
+    background-size: 300% 300%;
+    animation: moveGradient 8s ease infinite;
+}
+
+/* Animación para mover el fondo y darle dinamismo */
+@keyframes moveGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+
 body {
     font-family: 'Inter', sans-serif;
-    background: var(--bg);
+    
     color: var(--text);
     line-height: 1.6;
     padding: 2rem;
@@ -78,15 +105,29 @@ body {
     gap: 1rem;
 }
 
-/* Formulario */
-.form-card {
-    background: rgba(200, 200, 200, 0.2);
 
+
+
+
+.form-card {
+    background: rgba(240, 240, 240, 0.3); /* Más opaco para mejor contraste */
+    backdrop-filter: blur(15px); /* Efecto vidrio más definido */
     padding: 2rem;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     margin-bottom: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Borde más visible */
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background 0.3s ease-in-out;
 }
+
+/* Efecto iluminado sin mover la tarjeta */
+.form-card:hover {
+    background: rgba(240, 240, 240, 0.4); /* Más iluminado pero sin perder opacidad */
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: var(--shadow), 0 4px 12px rgba(255, 255, 255, 0.25); /* Sombra más clara pero sutil */
+}
+
+/* Formulario */
 
 .form-grid {
     display: grid;
@@ -333,9 +374,7 @@ textarea.form-control {
             </div>
             
             <div class="actions">
-                <button class="icon-btn" id="toggleTheme">
-                    <i class="fas fa-moon"></i>
-                </button>
+
                 <input type="file" id="import" hidden>
                 <label for="import" class="icon-btn">
                     <i class="fas fa-file-import"></i>
@@ -384,95 +423,6 @@ textarea.form-control {
         </main>
     </div>
 
-    <script>
-        class AccountManager {
-            constructor() {
-                this.accounts = this.loadAccounts();
-                this.init();
-            }
-
-            init() {
-                this.setupEventListeners();
-                this.render();
-            }
-
-            setupEventListeners() {
-                // Formulario
-                document.getElementById('accountForm').addEventListener('submit', (e) => this.handleSubmit(e));
-                
-                // Tema
-                document.getElementById('toggleTheme').addEventListener('click', () => this.toggleTheme());
-                
-                // Controles
-                document.addEventListener('click', (e) => {
-                    if (e.target.closest('.toggle-password')) this.togglePassword(e);
-                    if (e.target.closest('.delete-btn')) this.deleteAccount(e);
-                });
-            }
-
-            handleSubmit(e) {
-                e.preventDefault();
-                const account = {
-                    id: Date.now(),
-                    platform: document.getElementById('platform').value,
-                    username: document.getElementById('username').value,
-                    password: document.getElementById('password').value
-                };
-                
-                this.accounts.push(account);
-                this.saveAccounts();
-                this.render();
-                e.target.reset();
-            }
-
-            render() {
-                const container = document.getElementById('accounts');
-                container.innerHTML = this.accounts.map(account => `
-                    <div class="account-card">
-                        <div class="card-actions">
-                            <button class="icon-btn delete-btn">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                        <h3>${account.platform}</h3>
-                        <p><strong>Usuario:</strong> ${account.username}</p>
-                        <p><strong>Contraseña:</strong> <span class="password">••••••••</span></p>
-                    </div>
-                `).join('');
-            }
-
-            togglePassword(e) {
-                const input = e.target.previousElementSibling;
-                input.type = input.type === 'password' ? 'text' : 'password';
-                e.target.classList.toggle('fa-eye-slash');
-            }
-
-            deleteAccount(e) {
-                const card = e.target.closest('.account-card');
-                const id = Number(card.dataset.id);
-                this.accounts = this.accounts.filter(acc => acc.id !== id);
-                this.saveAccounts();
-                this.render();
-            }
-
-            toggleTheme() {
-                const theme = document.documentElement.getAttribute('data-theme');
-                const newTheme = theme === 'light' ? 'dark' : 'light';
-                document.documentElement.setAttribute('data-theme', newTheme);
-                localStorage.setItem('theme', newTheme);
-            }
-
-            loadAccounts() {
-                return JSON.parse(localStorage.getItem('accounts')) || [];
-            }
-
-            saveAccounts() {
-                localStorage.setItem('accounts', JSON.stringify(this.accounts));
-            }
-        }
-
-        // Inicializar aplicación
-        new AccountManager();
-    </script>
+    
 </body>
 </html>

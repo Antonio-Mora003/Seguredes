@@ -19,14 +19,30 @@
     }
     
     body {
-        background-color: #f4f4f4;
-        color: #333;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        padding: 20px;
+    background: linear-gradient(-45deg, #66a3ff, #99ccff, #80e5b6, #4dd2a7);
+    background-size: 300% 300%;
+    animation: moveGradient 10s ease infinite;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Animación para un efecto suave y relajante */
+@keyframes moveGradient {
+    0% {
+        background-position: 0% 50%;
     }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
     
     .panel-container {
         display: flex;
@@ -278,7 +294,7 @@
                                 </button>
                             </a>
                             
-                            <a href="ver-registros.html" class="pw-btnlink-8w4e">
+                            <a href="galeria.html" class="pw-btnlink-8w4e">
                                 <button class="pw-mainbtn-3c7q pw-color2-m1x8">
                                     <span class="pw-btnico-2m4v">📂</span>
                                     Ver Todas
